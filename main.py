@@ -23,7 +23,13 @@ class ChatRequest(BaseModel):
 @app.post("/chat")
 def chat(req: ChatRequest):
     headers = {"Authorization": f"Bearer {HUGGINGFACE_API_TOKEN}"}
-    data = {"inputs": f"You are a pet expert. Only answer pet-related questions. {req.message}"}
+    data = {
+        "inputs": f"""
+You are a professional veterinarian and pet care expert named PetBot. Your job is to answer any questions about animals, pets, and pet sitting. Be helpful, clear, and specific in your responses. Only answer questions related to pets and pet care.
+
+User: {req.message}
+PetBot:"""
+    }
 
     response = requests.post(
         f"https://api-inference.huggingface.co/models/{HUGGINGFACE_MODEL}",
