@@ -15,7 +15,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 HUGGINGFACE_API_TOKEN = os.getenv("HF_API_TOKEN")
-HUGGINGFACE_MODEL = "mistralai/Mixtral-8x7B-Instruct-v0.1"
+HUGGINGFACE_MODEL = "tiiuae/falcon-1b-instruct"
 
 class ChatRequest(BaseModel):
     message: str
