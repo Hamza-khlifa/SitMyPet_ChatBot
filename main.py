@@ -2,9 +2,18 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 import requests
 import os
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
+# Allow requests from Ionic app (localhost)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # For testing; use specific domains in production, e.g., ["http://localhost:8100"]
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 HUGGINGFACE_API_TOKEN = os.getenv("HF_API_TOKEN")
 HUGGINGFACE_MODEL = "HuggingFaceH4/zephyr-7b-beta"
 
